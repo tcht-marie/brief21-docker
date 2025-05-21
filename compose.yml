@@ -1,0 +1,38 @@
+services:
+  api:
+    image: registry.nocturlab.fr/mtranchant/brief21phoque
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.brief21bichette-web.rule=Host(`brief21bichette.nocturlab.fr`)
+      - traefik.http.services.brief21bichette-web.loadbalancer.server.port=8080
+    networks:
+      - traefik
+      - db
+    environment:
+      - HOST=0.0.0.0
+      - POSTGRES_HOST=db:5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=app
+    networks:
+      - db
+    volumes:
+      - brief21_data:/var/lib/postgresql/data
+
+volumes:
+  brief21_data:
+
+networks:
+  db:
+  traefik:
+    external: true
+    name: traefik_default
