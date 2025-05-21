@@ -1,0 +1,19 @@
+meta {
+  name: getUserById
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{host}}/api/users/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 1
+}
+
+headers {
+  Content-type: application/json
+}

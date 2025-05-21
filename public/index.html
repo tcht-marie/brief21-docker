@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        header {
+            background-color: #1a237e;
+            color: #fff;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.75rem;
+            letter-spacing: 1px;
+        }
+        section.showcase {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+            padding: 3rem 1rem 6rem 1rem;
+            text-align: center;
+            margin-top: 4rem;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        section.showcase h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        section.showcase p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        section.showcase a.cta-button {
+            background-color: #ff6f61;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        section.showcase a.cta-button:hover {
+            background-color: #ff4040;
+            transform: scale(1.05);
+        }
+        main.container {
+            padding: 1rem;
+        }
+        section.section-title {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+        section.section-title h2 {
+            font-size: 1.75rem;
+            font-family: 'Montserrat', sans-serif;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #6a11cb;
+        }
+        section.product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        section.product-list.pre-order {
+            flex-direction: column;
+        }
+        section.product-list.newly-added {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        section.product-item {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        article.product-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        article.product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        figure.placeholder {
+            background-color: #ddd;
+            height: 200px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.25rem;
+            margin: 0;
+            border-bottom: 1px solid #eee;
+        }
+        section.details {
+            padding: 1.5rem;
+            width: 100%;
+        }
+        section.details h2 {
+            margin: 0 0 1rem;
+            font-size: 1.5rem;
+            color: #1a237e;
+            font-family: 'Montserrat', sans-serif;
+        }
+        section.details p {
+            margin: 0 0 1rem;
+            color: #555;
+            font-size: 1rem;
+        }
+        section.details .price {
+            font-size: 1.25rem;
+            color: #ff6f61;
+            font-weight: bold;
+        }
+        section.reviews {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+        section.reviews h3 {
+            font-size: 1.25rem;
+            color: #1a237e;
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        section.reviews p {
+            margin: 0 0 1rem;
+            color: #555;
+            font-size: 1rem;
+        }
+        section.reviews .rating {
+            color: #ff6f61;
+            font-size: 1rem;
+        }
+        .arrow-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .arrow-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .arrow-button.left {
+            left: 10px;
+        }
+        .arrow-button.right {
+            right: 10px;
+        }
+        section.collections {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        section.collections h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        section.collections a.collection-link {
+            background-color: #ff6f61;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        section.collections a.collection-link:hover {
+            background-color: #ff4040;
+            transform: scale(1.05);
+        }
+        footer {
+            background-color: #1a237e;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            section.showcase h2 {
+                font-size: 2.5rem;
+            }
+            section.showcase p {
+                font-size: 1.5rem;
+            }
+            section.showcase a.cta-button {
+                font-size: 1.25rem;
+                padding: 0.75rem 2rem;
+            }
+            section.section-title h2 {
+                font-size: 2rem;
+            }
+            section.product-list.newly-added {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2rem;
+            }
+            section.product-item {
+                width: calc(50% - 2rem);
+            }
+            section.product-list.best-sellers {
+                flex-direction: column;
+            }
+            section.product-item.best-sellers {
+                display: flex;
+                flex-direction: row;
+                gap: 2rem;
+                width: 100%;
+            }
+            section.product-item.best-sellers:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        }
+
+        @media (min-width: 900px) {
+            main.container {
+                max-width: 1200px;
+                margin: 3rem auto;
+                padding: 0 1rem;
+            }
+            section.product-item {
+                width: calc(33.333% - 2rem);
+            }
+            section.product-item.best-sellers {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shop</h1>
+    </header>
+    <section class="showcase">
+        <h2>Discover Unique Artistic Creations</h2>
+        <p>Explore our collection of handcrafted enamel pins, keyrings, and more. Each piece is designed with passion and crafted with precision.</p>
+        <a href="#shop" class="cta-button">Shop Now</a>
+    </section>
+    <main class="container" id="shop">
+        <section class="section-title">
+            <h2>Pre-Order</h2>
+        </section>
+        <section class="product-list pre-order">
+            <article class="product-item">
+                <article class="product-card">
+                    <figure class="placeholder">Image</figure>
+                    <section class="details">
+                        <h2>Exclusive Art Piece</h2>
+                        <p>Pre-order this exclusive art piece before it's gone! Limited quantity available.</p>
+                        <p class="price">\$25.00</p>
+                    </section>
+                </article>
+            </article>
+        </section>
+        <section class="section-title">
+            <h2>Newly Added</h2>
+        </section>
+        <section class="product-list newly-added">
+            <article class="product-item">
+                <article class="product-card">
+                    <figure class="placeholder">Image</figure>
+                    <section class="details">
+                        <h2>New Enamel Pin</h2>
+                        <p>A newly added enamel pin with a fresh design.</p>
+                        <p class="price">\$12.00</p>
+                    </section>
+                </article>
+            </article>
+            <article class="product-item">
+                <article class="product-card">
+                    <figure class="placeholder">Image</figure>
+                    <section class="details">
+                        <h2>New Keyring</h2>
+                        <p>A stylish new keyring with a unique design.</p>
+                        <p class="price">\$9.00</p>
+                    </section>
+                </article>
+            </article>
+        </section>
+        <section class="section-title">
+            <h2>Best Sellers</h2>
+        </section>
+        <section class="product-list best-sellers">
+            <section class="product-item best-sellers">
+                <article class="product-card">
+                    <figure class="placeholder">Image</figure>
+                    <section class="details">
+                        <h2>Best Selling Pin</h2>
+                        <p>Our best-selling enamel pin loved by many.</p>
+                        <p class="price">\$10.00</p>
+                    </section>
+                </article>
+                <section class="reviews">
+                    <button class="arrow-button left" onclick="scrollReviews(this, -1)">&#9664;</button>
+                    <button class="arrow-button right" onclick="scrollReviews(this, 1)">&#9654;</button>
+                    <div class="review-container">
+                        <div class="review-slide">
+                            <h3>Customer Reviews</h3>
+                            <p><strong>Michael B.</strong> - "This pin is a must-have! The design is perfect."</p>
+                            <p class="rating">★★★★☆</p>
+                        </div>
+                        <div class="review-slide" style="display: none;">
+                            <h3>Customer Reviews</h3>
+                            <p><strong>Alice K.</strong> - "Absolutely love this pin! Great quality."</p>
+                            <p class="rating">★★★★☆</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <section class="product-item best-sellers">
+                <article class="product-card">
+                    <figure class="placeholder">Image</figure>
+                    <section class="details">
+                        <h2>Best Selling Keyring</h2>
+                        <p>A popular keyring with excellent reviews.</p>
+                        <p class="price">\$8.00</p>
+                    </section>
+                </article>
+                <section class="reviews">
+                    <button class="arrow-button left" onclick="scrollReviews(this, -1)">&#9664;</button>
+                    <button class="arrow-button right" onclick="scrollReviews(this, 1)">&#9654;</button>
+                    <div class="review-container">
+                        <div class="review-slide">
+                            <h3>Customer Reviews</h3>
+                            <p><strong>Sarah L.</strong> - "Great quality and design. Highly recommend!"</p>
+                            <p class="rating">★★★★☆</p>
+                        </div>
+                        <div class="review-slide" style="display: none;">
+                            <h3>Customer Reviews</h3>
+                            <p><strong>David P.</strong> - "This keyring is fantastic! Very durable."</p>
+                            <p class="rating">★★★★☆</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+        <section class="section-title">
+            <h2>Collections</h2>
+        </section>
+        <section class="collections">
+            <a href="#" class="collection-link">View All Collections</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Shop. All rights reserved.</p>
+    </footer>
+    <script>
+        function scrollReviews(button, direction) {
+            const container = button.closest('.reviews').querySelector('.review-container');
+            const slides = container.querySelectorAll('.review-slide');
+            let currentIndex = Array.from(slides).indexOf(container.querySelector('.review-slide:not([style*="display: none"])'));
+            let newIndex = (currentIndex + direction + slides.length) % slides.length;
+            slides[currentIndex].style.display = 'none';
+            slides[newIndex].style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Welcome to the Shop!');
+        });
+    </script>
+</body>
+</html>
